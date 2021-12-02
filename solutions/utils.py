@@ -3,9 +3,6 @@ import os
 from pathlib import Path
 from typing import Callable, List, Optional, TypeVar, Union
 
-from dotenv import load_dotenv
-import requests
-
 __all__ = ("get_day", "read_input", "fetch_input")
 
 T = TypeVar('T')
@@ -49,15 +46,20 @@ def _check_cookie(cookie: Optional[str]) -> bool:
     return cookie is not None and cookie != "None"
 
 
+# the imports in this function aren't top-level imported to save time when they aren't needed
 def fetch_input(day: Union[int, str] = None, year: int = 2021) -> List[str]:
     day = get_day(day)
 
     session_cookie = os.getenv("AOC_SESSION")
     if not _check_cookie(session_cookie):
+        from dotenv import load_dotenv
+
         load_dotenv()
         session_cookie = os.getenv("AOC_SESSION")
     if not _check_cookie(session_cookie):
         raise ValueError("set your session cookie in the .env file")
+
+    import requests
 
     url = f"https://adventofcode.com/{year}/day/{day}/input"
     r = requests.get(url, cookies={"session": session_cookie})
