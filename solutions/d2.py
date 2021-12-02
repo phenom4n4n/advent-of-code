@@ -35,5 +35,6 @@ def part2():
     print(horizontal, vertical, aim, horizontal * vertical)
 
 
-part1()
-part2()
+if __name__ == '__main__':
+    part1()
+    part2()
