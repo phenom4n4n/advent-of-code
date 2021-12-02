@@ -16,6 +16,6 @@ def read_input(
     if not day:
         day = datetime.now(timezone(timedelta(hours=-5))).day 
         # assumes the file is from the current day in EST
-    path = Path(__file__).resolve().parent / "input" / f"d{day}.txt"
+    path = Path(__file__).resolve().parent.parent / "input" / f"d{day}.txt"
     with open(path, "r", encoding="utf-8") as f:
         return [c(l) for l in f.read().strip().split(splitter)]
