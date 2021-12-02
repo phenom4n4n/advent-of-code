@@ -1,6 +1,7 @@
 from utils import read_input
 
-data = read_input(2, c=str.strip)
+data = read_input(__file__, c=str.strip)
+
 
 def part1():
     horizontal = 0
@@ -15,6 +16,7 @@ def part1():
         elif command == "forward":
             horizontal += amount
     print(horizontal, vertical, horizontal * vertical)
+
 
 def part2():
     horizontal = 0
@@ -31,6 +33,7 @@ def part2():
             horizontal += amount
             vertical += (amount * aim)
     print(horizontal, vertical, aim, horizontal * vertical)
+
 
 part1()
 part2()

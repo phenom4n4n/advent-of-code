@@ -1,6 +1,7 @@
 from utils import read_input
 
-data = read_input(1, c=int)
+data = read_input(__file__, c=int)
+
 
 def part1():
     increases = 0
@@ -11,6 +12,7 @@ def part1():
         previous = num
     print(increases)
 
+
 def part2():
     increases = 0
     previous = sum(data[:3])
@@ -20,6 +22,7 @@ def part2():
             increases += 1
         previous = total
     print(increases)
+
 
 part1()
 part2()
