@@ -1,6 +1,5 @@
-from typing import List
-
 from collections import defaultdict
+from typing import List
 
 from utils import read_input
 
@@ -48,6 +47,6 @@ def part2():
     print(o_gen, scrubber, o_gen * scrubber)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     part1()
     part2()
