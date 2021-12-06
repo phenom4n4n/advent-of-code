@@ -22,12 +22,19 @@ def get_day(day: Union[int, str] = None) -> int:
     return day
 
 
+def _return_input(data: str, splitter: str, c: Callable[[str], T]) -> List[T]:
+    return [c(l) for l in data.strip().split(splitter)]
+
+
 def read_input(
     day: Union[int, str] = None,
     splitter: str = "\n",
     *,
-    c: Callable[[str], T] = str
+    c: Callable[[str], T] = str,
+    override: str = None,
 ) -> List[T]:
+    if override:
+        return _return_input(override, splitter, c)
     day = get_day(day)
     path = PROJECT_ROOT / "input" / f"d{day}.txt"
     try:
@@ -39,7 +46,7 @@ def read_input(
     else:
         with open(path, "r", encoding="utf-8") as f:
             data = f.read()
-    return [c(l) for l in data.strip().split(splitter)]
+    return _return_input(data, splitter, c)
 
 
 def _check_cookie(cookie: Optional[str]) -> bool:
