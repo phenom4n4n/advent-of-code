@@ -1,10 +1,7 @@
 from collections import Counter
-from typing import List
 
 from utils import read_input
 
-
-test = "3,4,3,1,2"
 data = read_input(__file__, ",", c=int)
 
 
@@ -16,6 +13,7 @@ def _get_children(days: int):
         counter[8] += counter[-1]
         del counter[-1]
     return sum(counter.values())
+
 
 def part1():
     print(_get_children(18))
