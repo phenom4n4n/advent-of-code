@@ -1,8 +1,7 @@
 from collections import Counter
-from functools import cached_property
 from typing import List, Tuple
 
-from utils import read_input
+from utils import run
 
 
 class Line:
@@ -71,19 +70,13 @@ class Field:
         return sum(v > 1 for v in self.grid.values())
 
 
-data = read_input(__file__, c=Line)
-
-
-def part1():
+@run(c=Line)
+def part1(data: List[Line]):
     field = Field(line for line in data if line.is_straight())
-    print(field.total_overlaps)
+    return field.total_overlaps
 
 
-def part2():
+@run(c=Line)
+def part2(data: List[Line]):
     field = Field(data)
-    print(field.total_overlaps)
-
-
-if __name__ == "__main__":
-    part1()
-    part2()
+    return field.total_overlaps

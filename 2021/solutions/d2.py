@@ -1,9 +1,10 @@
-from utils import read_input
+from typing import List
 
-data = read_input(__file__, c=str.strip)
+from utils import run
 
 
-def part1():
+@run()
+def part1(data: List[str]):
     horizontal = 0
     vertical = 0
     for line in data:
@@ -15,10 +16,11 @@ def part1():
             vertical += amount
         elif command == "forward":
             horizontal += amount
-    print(horizontal, vertical, horizontal * vertical)
+    return horizontal * vertical
 
 
-def part2():
+@run()
+def part2(data: List[str]):
     horizontal = 0
     aim = 0
     vertical = 0
@@ -32,9 +34,4 @@ def part2():
         elif command == "forward":
             horizontal += amount
             vertical += (amount * aim)
-    print(horizontal, vertical, aim, horizontal * vertical)
-
-
-if __name__ == '__main__':
-    part1()
-    part2()
+    return horizontal * vertical

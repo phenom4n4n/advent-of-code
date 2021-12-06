@@ -1,29 +1,24 @@
-from utils import read_input
+from typing import List
 
-data = read_input(__file__, c=int)
+from utils import run
 
 
-def part1():
+@run(c=int)
+def part1(data: List[int]):
     for i, n in enumerate(data):
         for k, e in enumerate(data):
             if i == k:
                 continue
             if n + e == 2020:
-                print(n * e)
-                return
+                return n * e
 
 
-def part2():
+@run(c=int)
+def part2(data: List[int]):
     for i, n in enumerate(data):
         for k, e in enumerate(data):
             for j, f in enumerate(data):
                 if i == k or k == j or i == j:
                     continue
                 if n + e + f == 2020:
-                    print(n * e * f)
-                    return
-
-
-if __name__ == "__main__":
-    part1()
-    part2()
+                    return n * e * f

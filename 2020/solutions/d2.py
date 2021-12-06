@@ -1,4 +1,6 @@
-from utils import read_input
+from typing import List
+
+from utils import run
 
 class PWord:
     def __init__(self, info: str):
@@ -17,17 +19,11 @@ class PWord:
         return (self.password[self.min - 1] + self.password[self.max - 1]).count(self.char) == 1
 
 
-data = read_input(__file__, c=PWord)
+@run(c=PWord)
+def part1(data: List[PWord]):
+    return sum(p.is_valid() for p in data)
 
 
-def part1():
-    print(sum(p.is_valid() for p in data))
-
-
-def part2():
-    print(sum(p.is_valid2() for p in data))
-
-
-if __name__ == "__main__":
-    part1()
-    part2()
+@run(c=PWord)
+def part2(data: List[PWord]):
+    return sum(p.is_valid2() for p in data)

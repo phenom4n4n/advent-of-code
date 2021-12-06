@@ -6,6 +6,7 @@ from typing import Callable, List, Optional, Tuple, TypeVar, Union
 __all__ = ("get_date", "read_input", "fetch_input", "PROJECT_ROOT")
 
 T = TypeVar("T")
+Converter = Callable[[str], T]
 
 PROJECT_ROOT = Path(__file__).parent.parent
 
@@ -37,7 +38,7 @@ def read_input(
     day: Union[int, str] = None,
     splitter: str = "\n",
     *,
-    c: Callable[[str], T] = str,
+    c: Converter = str,
     override: str = None,
     year: int = 2021,
 ) -> List[T]:

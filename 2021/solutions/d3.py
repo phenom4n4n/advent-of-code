@@ -1,17 +1,15 @@
 from collections import defaultdict
 from typing import List
 
-from utils import read_input
+from utils import run
 
 
 def convert(line: str) -> List[int]:
     return [int(x) for x in line]
 
 
-data = read_input(__file__, c=convert)
-
-
-def part1():
+@run(c=convert)
+def part1(data: List[List[int]]):
     common = defaultdict(int)
     for line in data:
         for i, bit in enumerate(line):
@@ -24,7 +22,7 @@ def part1():
         epsilon_bits += str(int(not common_bit))
     gamma = int(gamma_bits, 2)
     epsilon = int(epsilon_bits, 2)
-    print(gamma, epsilon, gamma * epsilon)
+    return gamma * epsilon
 
 
 def _get_common_bit_lines(lines: List[int], index: int = 0, least: bool = False) -> int:
@@ -41,12 +39,8 @@ def _get_common_bit_lines(lines: List[int], index: int = 0, least: bool = False)
     return _get_common_bit_lines(common_lines, index + 1, least)
 
 
-def part2():
+@run(c=convert)
+def part2(data: List[List[int]]):
     o_gen = _get_common_bit_lines(data)
     scrubber = _get_common_bit_lines(data, least=True)
-    print(o_gen, scrubber, o_gen * scrubber)
-
-
-if __name__ == "__main__":
-    part1()
-    part2()
+    return o_gen * scrubber

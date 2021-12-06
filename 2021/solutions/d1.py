@@ -1,19 +1,21 @@
-from utils import read_input
+from typing import List
 
-data = read_input(__file__, c=int)
+from utils import run
 
 
-def part1():
+@run(c=int)
+def part1(data: List[int]):
     increases = 0
     previous = data[0]
     for num in data[1:]:
         if num > previous:
             increases += 1
         previous = num
-    print(increases)
+    return increases
 
 
-def part2():
+@run(c=int)
+def part2(data: List[int]):
     increases = 0
     previous = sum(data[:3])
     for i in range(1, len(data)):
@@ -21,9 +23,4 @@ def part2():
         if total > previous:
             increases += 1
         previous = total
-    print(increases)
-
-
-if __name__ == '__main__':
-    part1()
-    part2()
+    return increases

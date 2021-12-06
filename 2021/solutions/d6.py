@@ -1,11 +1,10 @@
 from collections import Counter
+from typing import List
 
-from utils import read_input
-
-data = read_input(__file__, ",", c=int)
+from utils import run
 
 
-def _get_children(days: int):
+def _get_children(data: List[int], days: int):
     counter = Counter(data)
     for _ in range(days):
         counter = Counter({k - 1: v for k, v in counter.items()})
@@ -15,14 +14,11 @@ def _get_children(days: int):
     return sum(counter.values())
 
 
-def part1():
-    print(_get_children(18))
+@run(",", c=int)
+def part1(data: List[int]):
+    return _get_children(data, 18)
 
 
-def part2():
-    print(_get_children(256))
-
-
-if __name__ == "__main__":
-    part1()
-    part2()
+@run(",", c=int)
+def part2(data: List[int]):
+    return _get_children(data, 256)

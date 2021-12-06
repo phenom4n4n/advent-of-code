@@ -1,7 +1,6 @@
-from utils import read_input
+from typing import List
 
-
-data = read_input(__file__, "\n\n", c=str)
+from utils import run
 
 
 class Board:
@@ -29,16 +28,15 @@ class Board:
     def check(self):
         for row in self.rows:
             if self.check_list(row):
-                print("row", row)
                 return row
         for column in self.columns:
             if self.check_list(column):
-                print("column", column)
                 return column
         return False
 
 
-def part1():
+@run("\n\n")
+def part1(data: List[str]):
     draws = map(int, data[0].split(","))
     drawn = []
     boards = [Board(d) for d in data[1:]]
@@ -47,13 +45,12 @@ def part1():
         for board in boards:
             result = board.mark(draw)
             if result:
-                print(drawn)
                 total = sum(n for n in board.nums if n not in drawn)
-                print(total, total * drawn[-1])
-                return
+                return total * drawn[-1]
 
 
-def part2():
+@run("\n\n")
+def part2(data: List[str]):
     draws = map(int, data[0].split(","))
     drawn = []
     boards = [Board(d) for d in data[1:]]
@@ -68,12 +65,5 @@ def part2():
         if not boards:
             break
     last_board = completed[-1]
-    print(drawn)
     total = sum(n for n in last_board.nums if n not in drawn)
-    print(total, total * drawn[-1])
-    return
-
-
-if __name__ == "__main__":
-    part1()
-    part2()
+    return total * drawn[-1]
