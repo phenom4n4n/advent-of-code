@@ -1,10 +1,10 @@
 from typing import Any, Callable, List
 
-from .input import read_input, Converter
+from .input import read_input, Converter, T
 
 __all__ = ("run",)
 
-Func = Callable[[List[Any]], Any]
+Func = Callable[[List[T]], Any]
 
 
 def run(splitter: str = "\n", *, c: Converter = str, override: str = None) -> Func:

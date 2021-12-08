@@ -1,7 +1,7 @@
 from datetime import datetime, timezone, timedelta
 import os
 from pathlib import Path
-from typing import Callable, List, Optional, Tuple, TypeVar, Union
+from typing import Callable, List, Optional, TypeVar, Union
 
 __all__ = ("get_date", "read_input", "fetch_input", "PROJECT_ROOT")
 
@@ -30,7 +30,7 @@ def get_date(day: Union[int, str] = None, year: int = None) -> datetime:
     return datetime(year, 12, day, tzinfo=tz)
 
 
-def _return_input(data: str, splitter: str, c: Callable[[str], T]) -> List[T]:
+def _return_input(data: str, splitter: str, c: Converter) -> List[T]:
     return [c(l) for l in data.strip().split(splitter)]
 
 
