@@ -30,16 +30,10 @@ def get_adjacent(coord: Tuple[int, int]) -> List[Tuple[int, int]]:
     row, column = coord
     adj = []
     if row > 0:
-        if column == 0:
-            left = (row - 1, COLUMNS - 1)
-        else:
-            left = (row - 1, column - 1)
+        left = (row - 1, COLUMNS - 1) if column == 0 else (row - 1, column - 1)
         adj.append(left)
     if row < ROWS - 1:
-        if column == COLUMNS - 1:
-            right = (row + 1, 0)
-        else:
-            right = (row + 1, column + 1)
+        right = (row + 1, 0) if column == COLUMNS - 1 else (row + 1, column + 1)
         adj.append(right)
     return adj
 
