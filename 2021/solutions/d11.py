@@ -54,6 +54,7 @@ def part1(data: List[str]) -> int:
         flashes += step_flashes
     return flashes
 
+
 @run()
 def part2(data: List[str]) -> int:
     cavern = Cavern(data)
