@@ -2,16 +2,6 @@ from typing import List, Set
 
 from utils import run
 
-test = """nop +0
-acc +1
-jmp +4
-acc +3
-jmp -3
-acc -99
-acc +1
-jmp -4
-acc +6"""
-
 
 class Instruction:
     __slots__ = ("line", "opp", "arg", "uses")
