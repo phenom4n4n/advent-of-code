@@ -1,6 +1,8 @@
 from __future__	import annotations
 
-from typing import Tuple, List, TypeVar, Optional, Iterator
+from typing import Any, Tuple, List, TypeVar, Optional, Iterator
+
+from .input import Converter, T
 
 __all__ = ("Point", "Grid")
 
@@ -10,10 +12,10 @@ P = TypeVar("P", bound="Point")
 class Point:
     __slots__ = ("grid", "x", "y", "value")
 
-    def __init__(self, grid: Grid, coords: Tuple[int, int], value: str):
+    def __init__(self, grid: Grid, coords: Tuple[int, int], value: str, *, c: Converter = str):
         self.grid = grid
         self.x, self.y = coords
-        self.value = value
+        self.value: T = c(value)
 
     def __repr__(self):
         return f"{self.__class__.__name__}(({self.x}, {self.y}): {self.value!r})"
@@ -95,10 +97,10 @@ class Point:
 class Grid:
     __slots__ = ("rows",)
 
-    def __init__(self, rows: List[str], point: P = Point):
-        self.rows = []
+    def __init__(self, rows: List[str], point: P = Point, **kwargs: Any):
+        self.rows: list[list[P]] = []
         for y, row in enumerate(rows):
-            points = [point(self, (x, y), c) for x, c in enumerate(row)]
+            points = [point(self, (x, y), c, **kwargs) for x, c in enumerate(row)]
             self.rows.append(points)
 
     def __repr__(self) -> str:
@@ -115,6 +117,10 @@ class Grid:
 
     def __len__(self) -> int:
         return self.length * self.width
+
+    @property
+    def columns(self) -> List[Tuple[P]]:
+        return list(zip(*self.rows))
 
     @property
     def length(self) -> int:

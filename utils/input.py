@@ -75,7 +75,6 @@ def fetch_input(day: Union[int, str, datetime] = None, year: int = 2021) -> List
         raise ValueError("set your session cookie in the .env file")
 
     import requests
-
     url = f"https://adventofcode.com/{date.year}/day/{date.day}/input"
     r = requests.get(url, cookies={"session": session_cookie})
     if r.status_code < 200 or r.status_code >= 300:
