@@ -31,7 +31,7 @@ def get_date(day: Union[int, str] = None, year: int = None) -> datetime:
 
 
 def _return_input(data: str, splitter: str, c: Converter) -> List[T]:
-    return [c(l) for l in data.strip().split(splitter)]
+    return [c(l) for l in data.split(splitter)]
 
 
 def read_input(
